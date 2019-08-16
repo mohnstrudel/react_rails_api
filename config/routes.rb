@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     get 'things', to: 'things#index'
   end
 
+  # Forward all requests to StaticController#index but requests
+  # must be non-Ajax (!req.xhr?) and HTML Mime type (req.format.html?).
   get '*page', to: 'static#index', constraints: ->(request) do
     !request.xhr? && request.format.html?
   end
